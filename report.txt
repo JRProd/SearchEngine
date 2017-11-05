@@ -1,0 +1,3 @@
+AVL Trees vs. Hash Tables
+
+For our situation, the hash table implementation (O(1) is much better than the AVL tree implementation (O(log n)). We know this because the AVL tree took a considerable amount longer in tests (upwards of 15min) compared to the hash table (<1min). AVL trees would be faster for very small sets but would be much less efficient for much larger sets like the wikibooks XML document. This is why we ultimately used the hash table in our primary implementation.

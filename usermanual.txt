@@ -1,0 +1,23 @@
+User Manual:
+
+Maintenance Mode:
+1. Add a document to the index
+	-give the address of the document to be indexed
+2. Clear the index
+	-clears the index
+3. Exit
+
+Regular User Mode:
+1. Choose between loading into an AVL Tree or a hash table.
+	-Hash Tables > AVL Tree
+2. Enter a query (must be in the below forms)
+	-e.g. boston
+	-AND boston seattle
+	-OR boston seattle
+	-AND boston seattle NOT dallas
+	-AND boston seattle computer
+3. Print statistics
+	-prints top 50 most frequently occurring words, # of words in the index, # of pages in the 	index
+4. Exit
+
+NOTE: Must load index into a data structure before querying
