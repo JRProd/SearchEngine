@@ -5,6 +5,7 @@
  */
 
 #include "hashindex.h"
+#include <iostream>
 
 /*!
  *

@@ -5,6 +5,7 @@
 * \date 4\21\2016
 */
 #include "rankprocessor.h"
+#include <iostream>
 
 /*!
 * \brief Default constructor; nothing is declared.

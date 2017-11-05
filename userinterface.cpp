@@ -7,7 +7,7 @@ UserInterface::UserInterface() {
 void UserInterface::start() {
     std::cout << "Before you begin. Would you like to use the \n\t0 - AVLTree\n\t1 - HashIndex\n>> ";
     std::string input = "";
-    std::cin >> input;
+    std::getline(std::cin, input , '\n');
     if(input == "0")
     {
         Indexer* index = new AVLTree();
@@ -28,7 +28,7 @@ void UserInterface::start() {
     std::cout << "Now, would you like to load in a file? \n(You must load a file before you can Query) \n\tyes - Load File\n\tno  - Load File Later\n>> ";
     input = "";
     bool incorrect = false;
-    std::cin >> input;
+    std::getline(std::cin, input , '\n');
     do
     {
         if(input == "yes")
@@ -45,9 +45,8 @@ void UserInterface::start() {
         else
         {
             std::cout << "Invalid command.\n";
-            std::cout << "Would you like to load in a \nfile? (You must load a file before you can Query) yes/no >> ";
+            std::cout << "Would you like to load in a file? \n(You must load a file before you can Query) yes/no >> ";
             std::getline(std::cin, input , '\n');
-            std::cin >> input;
             incorrect = true;
         }
     }while(incorrect == true);
@@ -55,7 +54,7 @@ void UserInterface::start() {
     std::cout << "Finally would you like to enter User Mode or Maintanance Mode?\n\tu - User Mode\n\tm - Maintanance Mode\n>> ";
     input = "";
     incorrect = false;
-    std::cin >> input;
+    std::getline(std::cin, input , '\n');
     do
     {
         if(input == "u")
@@ -90,7 +89,7 @@ void UserInterface::loadFile()
     std::cout << ">> ";
     bool incorrect = false;
     std::string input = "";
-    std::cin >> input;
+    std::getline(std::cin, input , '\n');
     do
     {
         if(input == "0")
@@ -126,7 +125,7 @@ void UserInterface::loadFile()
             std::cout << "\t2 - Own XML File\n";
             std::cout << ">> ";
             std::getline(std::cin, input , '\n');
-            std::cin >> input;
+            // std::cin >> input;
             incorrect = true;
         }
     }while(incorrect == true);
@@ -145,18 +144,19 @@ void UserInterface::user() {
     stop = false;
     while(stop == false)
     {
-        std::cin >> input;
+        std::getline(std::cin, input , '\n');
         bool incorrect = false;
         do
         {
-            if (input == "0") {
+            if (input.compare("0") == 0) {
                 input = "";
                 if(indexedParsed == false)
                     loadFile();
                 std::cout << "Enter query >> ";
                 std::getline(std::cin, input , '\n');
-                std::getline(std::cin, input , '\n');
+                std::cout << "Input is = " << input << "\n";
                 se.querySearch(input); //returns pages of results
+                std::getline(std::cin, input , '\n');
                 incorrect = false;
                 input = "";
                 std::cout << "Enter another command?\n";
@@ -167,7 +167,7 @@ void UserInterface::user() {
                 std::cout << ">> ";
             }
             //Print stats
-            else if (input == "1") {
+            else if (input.compare("1") == 0) {
                 se.printStats();
                 std::cout << "Enter another command?\n";
                 std::cout << "\t0 - Enter a query" << std::endl;
@@ -176,11 +176,11 @@ void UserInterface::user() {
                 std::cout << "\tEND - Exit\n>> ";
                 incorrect = false;
             }
-            else if (input == "2") {
+            else if (input.compare("2") == 0) {
                 maintenance();
                 incorrect = false;
             }
-            else if (input == "END") {
+            else if (input.compare("END") == 0) {
                 stop = true;
                 incorrect = false;
                 return;
@@ -193,7 +193,7 @@ void UserInterface::user() {
             else {
                 std::cerr << "Invalid entry.\n";
                 std::cout << "Please reenter the command >> ";
-                std::cin >> input;
+                std::getline(std::cin, input , '\n');
                 incorrect = true;
             }
         }while(incorrect == true);

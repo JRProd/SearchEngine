@@ -1,10 +1,10 @@
 #include "searchprocessor.h"
+#include <iostream>
 
 SearchProcessor::SearchProcessor() { }
 
 
 std::vector<Page> SearchProcessor::search(Query q, Indexer* i) {
-
     std::vector<Page> searchresults;
     if(q.isBinary())
     {
@@ -34,7 +34,6 @@ std::vector<Page> SearchProcessor::search(Query q, Indexer* i) {
         }
     }
     return searchresults;
-
 }
 
 

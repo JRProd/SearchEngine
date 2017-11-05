@@ -13,6 +13,7 @@
 
 #include "query.h"
 #include <stdexcept>
+#include <iostream>
 
 /*!
  * \brief Default constructor; nothing is declared.

@@ -7,12 +7,13 @@
 */
 
 #include "queryprocessor.h"
+#include <iostream>
 
 /*!
 * \brief Default constructor; nothing is declared.
 */
 QueryProcessor::QueryProcessor() {
-	
+
 }
 
 /*!
@@ -27,6 +28,7 @@ Query QueryProcessor::newQuery(std::string userquery) {
     copy(std::istream_iterator<std::string>(iss),
         std::istream_iterator<std::string>(),
         std::back_inserter(tokens));
+
 
     bool binary = false;
     bool isNot = false;
@@ -62,6 +64,7 @@ Query QueryProcessor::newQuery(std::string userquery) {
         }
         if(binary)
         {
+            std::cout << "Adding multipe binaries\n";
             query.addBinary(temp);
         }
         if(isNot)
