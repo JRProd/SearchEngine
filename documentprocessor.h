@@ -14,7 +14,6 @@
 #include <unordered_set>
 #include <unordered_map>
 
-#include "page.h" //do i need this?
 #include "avltree.h"
 #include "tinyxml2.h"
 #include "porter2_stemmer.h"
@@ -42,7 +41,6 @@ public:
 	DocumentProcessor(std::string);
     DocumentProcessor(Indexer* idx);
     void parse(std::string);
-	void addDocument(std::string);
 	void setDocument(std::string);
 	void setDocumentIndex(Indexer*);
 	void setStopWords();

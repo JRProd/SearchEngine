@@ -5,6 +5,10 @@
 
 #include "query.h"
 #include "porter2_stemmer.h"
+#include <vector>
+#include <sstream>
+#include <iterator>
+#include <algorithm>
 
 class QueryProcessor {
 private:

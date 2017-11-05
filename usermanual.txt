@@ -1,5 +1,7 @@
 User Manual:
 
+Our search engine implements either an AVLTree or HashMap. Each stores a Word and an associated list of page IDs. These IDs are used in a lookup table that allows for almost immediate page retrieval.
+
 Maintenance Mode:
 1. Add a document to the index
 	-give the address of the document to be indexed
@@ -17,7 +19,7 @@ Regular User Mode:
 	-AND boston seattle NOT dallas
 	-AND boston seattle computer
 3. Print statistics
-	-prints top 50 most frequently occurring words, # of words in the index, # of pages in the 	index
+	-prints top 50 most frequently occurring words, # of words in the index, # of pages in the index
 4. Exit
 
 NOTE: Must load index into a data structure before querying

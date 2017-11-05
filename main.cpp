@@ -3,12 +3,8 @@
 #include "userinterface.h"
 
 int main() {
-	UserInterface ui;
-	std::string init;
-	std::cout << "1. Maintenance Mode (m)" << std::endl;
-	std::cout << "2. User Mode (u)" << std::endl;
-	std::cin >> init;
-	ui.start(init);
+    UserInterface ui;
+    ui.start();
 
 	/*
 	// DOCUMENT PROCESSOR TESTER

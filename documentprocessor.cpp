@@ -27,14 +27,13 @@ void DocumentProcessor::setDocumentIndex(Indexer* idx) {
 }
 
 void DocumentProcessor::parse(std::string dir) {
+    std::cout << "Started Doc Parse\n";
 	XMLDocument xmldoc;
     xmldoc.LoadFile(dir.c_str());
 	XMLElement* root_node = xmldoc.FirstChildElement();
 	XMLElement* page_node = root_node->FirstChildElement("page");
     int counter = 0;
     int notIndexed = 0;
-
-	std::cout << "Begin parsing the file" << "\n";
     while( true )
     {
 		if (page_node == nullptr)
@@ -71,16 +70,8 @@ void DocumentProcessor::parse(std::string dir) {
         }
 
         page_node = page_node->NextSiblingElement("page");
-	}
-    std::cout << "Total :: " << counter << "\n";
-    std::cout << "Added :: " << counter-notIndexed << "\n";
-    std::cout << "Foreign removed: " << notIndexed << "\n";
+    }
 }
-
-void DocumentProcessor::addDocument(std::string dir) {
-	parse(dir);
-}
-
 
 void DocumentProcessor::setDocument(std::string d) {
 	document = d;

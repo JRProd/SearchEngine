@@ -9,13 +9,15 @@
 class UserInterface {
 private:
 	SearchEngine se;
-	bool user();
-	bool maintenance();
-	bool running;
+    void user();
+    void maintenance();
+    void loadFile();
+    bool indexedParsed;
+    bool stop;
 
 public:
 	UserInterface();
-	void start(std::string);
+    void start();
 
 };
 #endif

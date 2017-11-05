@@ -38,7 +38,7 @@ void Query::setBinary(bool b)
  */
 void Query::addBinary(Word w)
 {
-    Binaries.push_front(w);
+    Binaries.push_back(w);
 }
 
 /*!
@@ -47,7 +47,7 @@ void Query::addBinary(Word w)
  */
 void Query::addNot(Word w)
 {
-    Nots.push_front(w);
+    Nots.push_back(w);
 }
 
 /*!
@@ -58,25 +58,9 @@ void Query::addNot(Word w)
  * \param i The index to be searched for
  * \return Returns the Word found at i
  */
-Word Query::getBinary(unsigned i) const
+Word& Query::getBinary(unsigned i)
 {
-    //Checks if the requested index is out of bounds
-    if(Binaries.size()<=i)
-        //Throws exception if it is
-        throw std::out_of_range("Index is out of range of Binaries");
-
-    //If not, iterate until the desired index is reached
-    unsigned index = 0;
-    for(std::list<Word>::const_iterator it = Binaries.cbegin(); it!=Binaries.cend(); it++)
-    {
-        //Once the index is reached, return the value that it is pointing to
-        if(index == i)
-            return *it;
-        index++;
-    }
-    //Program will never reach this point because ive have a pre check that index is valid
-    //still needed because fuction must have a default return statement
-    return Word();
+    return Binaries.at(i);
 }
 
 /*!
@@ -87,25 +71,9 @@ Word Query::getBinary(unsigned i) const
  * \param i The index to be searched for
  * \return Returns the Word found at i
  */
-Word Query::getNot(unsigned i) const
+Word& Query::getNot(unsigned i)
 {
-    //Checks if the requested index is out of bounds
-    if(Nots.size()<=i)
-        //Throws exception if it is
-        throw std::out_of_range("Index is out of range of Nots");
-
-    //If not, iterate until the desired index is reached
-    unsigned index = 0;
-    for(std::list<Word>::const_iterator it = Nots.cbegin(); it!=Nots.cend(); it++)
-    {
-        //Once the index is reached, return the value that it is pointing to
-        if(index == i)
-            return *it;
-        index++;
-    }
-    //Program will never reach this point because ive have a pre check that index is valid
-    //still needed because fuction must have a default return statement
-    return Word();
+    return Nots.at(i);
 }
 
 int Query::getBinarySize()
@@ -115,7 +83,7 @@ int Query::getBinarySize()
 
 int Query::getNotSize()
 {
-    return Binaries.size();
+    return Nots.size();
 }
 
 /*!
@@ -123,7 +91,7 @@ int Query::getNotSize()
  * If the list Binaries is of size 1, return AND
  * \return The Binary operator
  */
-bool Query::isBinary() const
+bool Query::isBinary()
 {
     if(Binaries.size()<=1)  //If at most one element is prsent the binaryOpp MUST be AND
         return true;
@@ -134,7 +102,7 @@ bool Query::isBinary() const
  * \brief Returns if a NOT operator was present
  * \return If Words need to be NOT'ed
  */
-bool Query::isNot() const
+bool Query::isNot()
 {
     if(Binaries.size()<1)   //If no elements are in Nots, then there is no NOT fuction
         return false;

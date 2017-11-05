@@ -21,54 +21,53 @@ QueryProcessor::QueryProcessor() {
 */
 Query QueryProcessor::newQuery(std::string userquery) {
 	Query query;
-	std::string x;
-	Word y;
-	bool nawt;
-	bool bin;
-	for (int i = 0; i < userquery.length(); i++) {        //AND boston seattle NOT tokyo
-		if (userquery.at(i) == ' ') {                   //OR boston seattle NOT tokyo
-			//if first term is not, set not bool to true and clear temp x string
-			if (x == "NOT") {
-				nawt = true;
-				x = "";
-			}
-			//if first term is or or and, set bin bool to true and clear temp x string
-			else if (x == "OR" || x == "AND") {
-				bin = true;
-				if (x == "OR")
-					query.setBinary(false);
-				else
-					query.setBinary(true);
-				x = "";
-			}
-			//if word is anything else, then put in either not library or binary library
-			else {
-				if (nawt) {
-					Porter2Stemmer::stem(x);
-					y.setWord(x);
-					query.addNot(y);
-					x = "";
-				}
-				if (bin) {
-					if (nawt) { }
-					else {
-						Porter2Stemmer::stem(x);
-						y.setWord(x);
-						query.addBinary(y);
-						x = "";
-					}
-				}
-			}
-		}
-		else {
-			x += userquery.at(i);
-		}
-		if (!nawt && !bin)
-			Porter2Stemmer::stem(x);
-			y.setWord(x);
-			query.addBinary(y);
-	}
 
+    std::vector<std::string> tokens;
+    std::istringstream iss(userquery);
+    copy(std::istream_iterator<std::string>(iss),
+        std::istream_iterator<std::string>(),
+        std::back_inserter(tokens));
 
+    bool binary = false;
+    bool isNot = false;
+
+    if(tokens.at(0).compare("OR") == 0)
+    {
+        query.setBinary(false);
+        binary = true;
+    }
+    else if(tokens.at(0).compare("AND") == 0)
+    {
+        query.setBinary(true);
+        binary = true;
+    }
+    else
+    {
+        std::string temp = tokens.at(0);
+        Porter2Stemmer::stem(temp);
+        query.addBinary(temp);
+        query.setBinary(true);
+        binary = true;
+    }
+    std::string temp;
+    for(int i = 1; i < tokens.size(); i++)
+    {
+        temp = tokens.at(i);
+        Porter2Stemmer::stem(temp);
+        if(temp.compare("NOT") == 0)
+        {
+            isNot = true;
+            binary = false;
+            continue;
+        }
+        if(binary)
+        {
+            query.addBinary(temp);
+        }
+        if(isNot)
+        {
+            query.addNot(temp);
+        }
+    }
 	return query;
 }

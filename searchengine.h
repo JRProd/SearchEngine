@@ -10,6 +10,7 @@
 #include "indexer.h"
 #include "hashindex.h"
 #include "GeneralHashFunctions.h"
+#include "page.h"
 
 class SearchEngine {
 private:
@@ -18,17 +19,18 @@ private:
 	RankProcessor rp;
 	QueryProcessor qp;
 	Indexer* ii;
+    std::string document;
 
 public:
 	SearchEngine();
 	//SearchEngine(bool);
-	void readDocument();
-	void querySearch(std::string);
+    void readPersistent();
+    void querySearch(std::string);
 	void parseDocument();
 	void clearIndex();
 	void printStats();
 	void setIndexPtr(Indexer*);
 	void addDocument(std::string);
-
+    void close();
 };
 #endif

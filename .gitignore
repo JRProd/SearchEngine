@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+##### USER DEFINED IGNORES #####
+documentation/
+Des/
+enwikibooks-latest-pages-meta-current.xml

@@ -4,12 +4,12 @@
 #define QUERY_H
 
 #include "word.h"
-#include <list>
+#include <vector>
 
 class Query {
 private:
-	std::list<Word> Binaries;
-	std::list<Word> Nots;
+    std::vector<Word> Binaries;
+    std::vector<Word> Nots;
 	bool binaryOpp;
 
 public:
@@ -17,11 +17,11 @@ public:
 	void setBinary(bool);
 	void addBinary(Word);
 	void addNot(Word);
-    Word getBinary(unsigned) const;
-    Word getNot(unsigned) const;
+    Word& getBinary(unsigned) ;
+    Word& getNot(unsigned) ;
     int getBinarySize();
     int getNotSize();
-    bool isBinary() const;
-    bool isNot() const;
+    bool isBinary() ;
+    bool isNot() ;
 };
 #endif
